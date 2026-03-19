@@ -7,6 +7,7 @@ def scores_analysis() -> None:
         print("No scores provided. Usage: python3 ft_score_analytics.py "
               "<score1> <score2> ...")
         return
+    i = 0
     try:
         for i in range(1, len(sys.argv)):
             scores += [int(sys.argv[i])]
