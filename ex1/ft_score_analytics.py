@@ -2,6 +2,12 @@ import sys
 
 
 def scores_analysis() -> None:
+    """
+    Parse command-line arguments as integers and perform statistical analysis.
+
+    The function calculates the total, average, maximum, minimum, and range
+    of the provided scores. It handles invalid non-integer inputs gracefully.
+    """
     scores = []
     if (len(sys.argv) < 2):
         print("No scores provided. Usage: python3 ft_score_analytics.py "
