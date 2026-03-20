@@ -18,62 +18,56 @@ def distance(tuple1: tuple[int, int, int],
     return distance
 
 
-def parsing_str_to_int(coor_str: str) -> tuple | None:
+def parsing_input() -> tuple[int, int, int]:
     """
-    Convert a comma-separated string into a tuple of integers.
+    Prompt the user for 3D coordinates and parse the input string.
 
-    :param coor_str: A string in 'x,y,z' format.
-    :return: A tuple of three integers or None if parsing fails.
+    Uses recursion to re-prompt the user in case of invalid syntax
+    or non-numeric values until a valid tuple is provided.
+
+    :return: A tuple containing three integers (x, y, z).
     """
-    # split needs the separator char and returns the list separated
-    coor_list = coor_str.split(",")
-    cx0, cy0, cz0 = coor_list  # unpacking also works with lists
+    pos1 = input("Enter new coordinates as floats in format 'x,y,z': ")
+    separated = pos1.split(",")
+    count = 0
+    for i in separated:
+        count += 1
+    if count < 3:
+        print("Invalid syntax")
+        # Stops the execution by giving the result of the new call
+        # avoiding dragging trash in the new data and continuing old code
+        return parsing_input()
+    float_list = []
+    i = 0
     try:
-        parse_coor = (int(cx0), int(cy0), int(cz0))
+        for i in separated:
+            float_list += [float(i)]
     except ValueError as e:
-        # Print the special char \" as "
-        print(f"Parsing invalid coordinates: \"{coor_str}\"")
-        print(f"Error parsing coordinates: {e}")
-        print(f"Error details - Type: ValueError, Args: {e.args}")
-        # prints the arguments of the error
-        return
-    return parse_coor
+        print(f"Error on parameter '{i}': {e}")
+        return parsing_input()
+    return tuple(float_list)
 
 
 def coordinates_test() -> None:
-    """Run a demonstration of coordinate parsing and distance calculation."""
+    """
+    Run a demonstration of coordinate parsing and distance calculation.
+
+    It asks for two sets of coordinates, displays their components,
+    and calculates distances to the origin and between each other.
+    """
     print("=== Game Coordinate System ===\n")
 
-    pos = (10, 20, 5)  # structure to declare a tuple: var = (x, y, z)
-    pos0 = (0, 0, 0)
-    dis = distance(pos0, pos)
-    print(f"Position created: {pos}")
-    # The dis:.2f allows you to choose the decimals to show (2 in here)
-    print(f"Distance between {pos0} and {pos}: {dis:.2f}\n")
+    pos1 = parsing_input()
+    print(f"Got a first tuple: {pos1}")
+    x1, y1, z1 = pos1
+    print(f"It includes: X={x1}, Y={y1}, Z={z1}")
+    dis1 = distance((0, 0, 0), pos1)
+    print(f"Distance to center: {dis1:.4f}\n")
 
-    coor_str = "3,4,0"
-    tuple_coor = parsing_str_to_int(coor_str)
-    if not tuple_coor:
-        return
-    else:
-        print(f"Parsing coodinates: \"{coor_str}\"")
-        print(f"Parsed position: {tuple_coor}")
-        dis = distance((0, 0, 0), tuple_coor)
-        print(f"Distance between (0, 0, 0) and {tuple_coor}: {dis:.1f}\n")
-        # only a decimal
-
-    # Bad input, tuple_coor will be 'None'
-    coor_str = "abc,def,ghi"
-    tuple_coor = parsing_str_to_int(coor_str)
-    if not tuple_coor:
-        # Continues without any action
-        pass
-
-    print("\nUnpacking demonstration:")
-    pos = (3, 4, 0)
-    x, y, z = pos
-    print(f"Player at: x={x}, y={y}, z={z}")
-    print(f"Coordinates: X={x}, Y={y}, Z={z}")
+    print("Got a second set of coordinates")
+    pos2 = parsing_input()
+    dis2 = distance(pos1, pos2)
+    print(f"Distance between the 2 sets of coordinates: {dis2:.4f}\n")
 
 
 if __name__ == "__main__":
