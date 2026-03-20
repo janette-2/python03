@@ -27,7 +27,7 @@ def parsing_str_to_int(coor_str: str) -> tuple | None:
     """
     # split needs the separator char and returns the list separated
     coor_list = coor_str.split(",")
-    cx0, cy0, cz0 = coor_list
+    cx0, cy0, cz0 = coor_list  # unpacking also works with lists
     try:
         parse_coor = (int(cx0), int(cy0), int(cz0))
     except ValueError as e:
