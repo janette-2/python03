@@ -16,7 +16,8 @@ def ft_achievement_tracker() -> None:
                       "speed_demon", "perfectionist"])
 
     # Printing sets (sets don't print the elements in order, it has no indexes)
-    # sets work with hash (complete what is it????????)
+    # sets work with hash (convertion of a text into an int and recognition of each
+    # element through their int representation)
     print(f"Player alice achievements:{alice_set}")
     print(f"Player bob achievements:{bob_set}")
     print(f"Player charlie achievements:{charlie_set}\n")
