@@ -1,3 +1,48 @@
+import random
+
+
+def gen_player_achievements(num: int) -> set:
+    """
+    Generate a set of unique random achievements for one player.
+
+    Args:
+        num (int): Number of achievements to assign.
+
+    Returns:
+        set: A set containing random unique achievements.
+    """
+    # List of all the possible achievements:
+    achievements = [
+        "Crafting Genius",
+        "Strategist",
+        "World Savior",
+        "Speed Runner",
+        "Survivor",
+        "Master Explorer",
+        "Treasure Hunter",
+        "Unstoppable",
+        "First Steps",
+        "Collector Supreme",
+        "Untouchable",
+        "Sharp Mind",
+        "Boss Slayer"
+    ]
+
+    # Initialized list that will collect all the items that
+    # will have the final set
+
+    selection = []
+
+    # Setting random elements into selection[] if they are not in the list
+    while (len(selection) < num):
+        achievement = random.choice(achievements)
+        if achievement not in selection:
+            selection += [achievement]
+
+    # Returning the set with the created list
+    return set(selection)
+
+
 def ft_achievement_tracker() -> None:
     """
     Analyze and display player achievement data using set operations.
@@ -5,20 +50,17 @@ def ft_achievement_tracker() -> None:
     This function demonstrates union, intersection, and difference
     to track unique, common, and rare achievements among players.
     """
+
     print("=== Achievement Tracker System ===\n")
 
     # Declaring sets (list of unique data, without duplicates) == set(list[])
     # or set = {el1, el2, ...}
-    alice_set = set(["Crafting Genius", "World Savior", "Master Explorer",
-                     "Collector Supreme", "Untouchable", "Boss Slayer"])
-    charlie_set = set(["Strategist", "Speed Runner", "Survivor",
-                       "Master Explorer", "Treasure Hunter", "First Steps",
-                       "Collector Supreme", "Untouchable", "Sharp Mind"])
-    bob_set = set(["Crafting Genius", "Strategist", "World Savior",
-                   "Master Explorer", "Unstoppable", "Collector Supreme",
-                   "Untouchable"])
-    dylan_set = set(["Strategist", "Speed Runner", "Unstoppable",
-                     "Untouchable", "Boss Slayer"])
+    alice_set = gen_player_achievements(6)
+    bob_set = gen_player_achievements(7)
+    charlie_set = gen_player_achievements(9)
+    dylan_set = gen_player_achievements(5)
+
+    # THE RESULTS WILL BE GIVING DIFFERENT OUTPUTS EACH TIME YOU EXECUTE
 
     # Printing sets (sets don't print the elements in order, it has no indexes)
     # sets work with hash (convertion of a text into an int and recognition of
@@ -52,8 +94,9 @@ def ft_achievement_tracker() -> None:
         bob_set).difference(charlie_set)
     print(f"Only Dylan has: {dylan_only}\n")
 
-    #  Compare particular sets intersections
-    hidden_set = {"Hidden Path Finder"}
+    #  Compare particular missing achievements compared to the other players
+
+    hidden_set = {"Hidden Path Finder"}  # Added to match the subject example
 
     alice_missing = bob_set.difference(alice_set).union(charlie_set.difference(
         alice_set)).union(dylan_set.difference(alice_set)).union(
@@ -75,7 +118,11 @@ def ft_achievement_tracker() -> None:
                     bob_set.difference(dylan_set)).union(
                     charlie_set.difference(dylan_set)).union(
                     hidden_set.difference(dylan_set))
-    print(f"Charlie is missing: {dylan_missing}")
+    print(f"Dylan is missing: {dylan_missing}")
+
+    # ** set(): This represents an empty set in python. It is the only way to
+    # express it and differentiate it with the empty representation
+    # of a dictionary: {}
 
 
 if __name__ == "__main__":
