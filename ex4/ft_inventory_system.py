@@ -120,7 +120,8 @@ def ft_inventory_system() -> None:
         print("Usage: python3 ft_inventory_system.py item:qty ...")
         return
     print("=== Inventory System Analysis ===")
-    inventory = dict()
+
+    inventory: dict[str, int] = {}
     # Parsing each element and setting it in the dict(), printing it if found
     parsing_command_argument_into_dict(inventory)
     if not inventory:
@@ -129,9 +130,7 @@ def ft_inventory_system() -> None:
         print(f"Got inventory: {inventory}")
 
     # Get the keys of the items found in the inventory
-    items = []
-    for i in inventory.keys():
-        items += [i]
+    items: list[str] = list(inventory.keys())
     print(f"Item list: {items}")
 
     # Get the total of all the items values together

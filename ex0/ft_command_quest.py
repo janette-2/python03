@@ -2,26 +2,27 @@ import sys
 
 
 def receive_parameters() -> None:
-    """
-    Process and display command-line arguments.
-
-    This function identifies the program name and iterates through
-    all provided arguments, printing their index and value.
-    """
     if (len(sys.argv) < 2):
         print("No arguments provided!")
         print(f"Program name: {sys.argv[0]}")
         print(f"Total arguments: {len(sys.argv)}")
         return
     else:
-        total_arguments = 0
-        for arg in sys.argv:
-            total_arguments += 1
-        total_arguments -= 1  # Minus the program name
+        total_arguments = len(sys.argv) - 1
+
         print(f"Program name: {sys.argv[0]}")
         print(f"Arguments received: {total_arguments}")
-        for arg in range(1, len(sys.argv)):  # arg serves as the counter 'i'
-            print(f"Argument {arg}: {sys.argv[arg]}")
+
+        for arg in range(1, len(sys.argv)):
+            c_str: str = sys.argv[arg]
+            c_int: int = 0
+            try:
+                c_int = int(c_str)
+            except ValueError as e:
+                print(f"Invalid input: {str(e)}")
+
+            print(f"Argument {arg}: {c_int}")
+
         print(f"Total arguments: {len(sys.argv)}")
         return
 

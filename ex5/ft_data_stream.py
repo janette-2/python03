@@ -3,7 +3,7 @@ import random
 
 
 def gen_events(
-        count: int) -> typing.Generator[tuple[str, int], None, None]:
+        count: int) -> typing.Generator[tuple[str, str], None, None]:
     """
     Generate a sequence of simulated game events.
 

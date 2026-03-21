@@ -31,7 +31,7 @@ def gen_player_achievements(num: int) -> set:
     # Initialized list that will collect all the items that
     # will have the final set
 
-    selection = []
+    selection: list[str] = []
 
     # Setting random elements into selection[] if they are not in the list
     while (len(selection) < num):

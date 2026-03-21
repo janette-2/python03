@@ -1,8 +1,8 @@
 import math
 
 
-def distance(tuple1: tuple[int, int, int],
-             tuple2: tuple[int, int, int]) -> float:
+def distance(tuple1: tuple[float, float, float],
+             tuple2: tuple[float, float, float]) -> float:
     """
     Calculate the Euclidean distance between two 3D coordinate tuples.
 
@@ -18,7 +18,7 @@ def distance(tuple1: tuple[int, int, int],
     return distance
 
 
-def parsing_input() -> tuple[int, int, int]:
+def parsing_input() -> tuple[float, float, float]:
     """
     Prompt the user for 3D coordinates and parse the input string.
 
@@ -30,22 +30,22 @@ def parsing_input() -> tuple[int, int, int]:
     pos1 = input("Enter new coordinates as floats in format 'x,y,z': ")
     separated = pos1.split(",")
     count = 0
-    for i in separated:
+    for _ in separated:
         count += 1
     if count < 3:
         print("Invalid syntax")
         # Stops the execution by giving the result of the new call
         # avoiding dragging trash in the new data and continuing old code
         return parsing_input()
-    float_list = []
     i = 0
     try:
-        for i in separated:
-            float_list += [float(i)]
+        x = float(separated[0])
+        y = float(separated[1])
+        z = float(separated[2])
     except ValueError as e:
         print(f"Error on parameter '{i}': {e}")
         return parsing_input()
-    return tuple(float_list)
+    return (x, y, z)
 
 
 def coordinates_test() -> None:
